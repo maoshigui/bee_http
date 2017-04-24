@@ -1,0 +1,39 @@
+{{template "header"}}
+    <title> 小区管理 - 测试管理系统 </title>
+  </head>
+
+  <body>
+    <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        {{template "navbar" .}}
+      </div>
+
+      <div class="container">
+          <h1>小区列表</h1>
+          <a href="/cell/add" class="btn btn-default">增加小区</a>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>CuId</th>
+                <th>DuId</th>
+                <th>CellId</th>
+                <th>Freq</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{range .Topics}}
+              <tr>
+                <th>{{.Id}}</th>
+                <th>{{.Cuid}}</th>
+                <th>{{.Duid}}</th>
+                <th>{{.Cellid}}</th>
+                <th>{{.Freq}}</th>
+              </tr>
+              {{end}}
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+{{define "navbar"}}
+<div class="navbar-header">
+    <a class="navbar-brand" href="/">测试管理系统</a>
+</div>
+<div class="collapse navbar-collapse">
+    <ul class="nav navbar-nav">
+        <li {{if .IsCell}} class="active" {{end}}><a href="/cell">小区管理</a></li>
+        <li {{if .IsTestCase}} class="active" {{end}}><a href="/testcase">用例管理</a></li>
+        <li {{if .IsStatistic}} class="active" {{end}}><a href="/statistic">统计报表</a></li>
+    </ul>
+</div>
+
+{{end}}
