@@ -11,14 +11,27 @@ type CellController struct {
 }
 
 func (c *CellController) Get() {
-	c.Data["IsCell"] = true
-	c.TplName = "cell.html"
+	switch c.Input().Get("op") {
+	case "del":
+		id := c.Input().Get("id")
+		err := models.DelCell(id)
+		if err != nil {
+			beego.Error(err)
+		}
 
-	cells, err := models.GetAllCells()
+		c.Redirect("/cell", 302)
+		return
+	case "setup":
+		c.Redirect("/cell", 302)
+		return
+	}
+
+	var err error
+	c.Data["IsCell"] = true
+	c.Data["Cells"], err = models.GetAllCells()
+	c.TplName = "cell.html"
 	if err != nil {
 		beego.Error(err)
-	} else {
-		c.Data["Cells"] = cells
 	}
 }
 
@@ -33,5 +46,5 @@ func (c *CellController) Post() {
 		beego.Error(err)
 	}
 
-	c.Redirect("/topic", 302)
+	c.Redirect("/cell", 302)
 }

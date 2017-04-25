@@ -10,7 +10,42 @@
 
       <div class="container">
           <h1>小区列表</h1>
-          <a href="/cell/add" class="btn btn-default">增加小区</a>
+          <form method="POST" class="form-inline" action="/cell">
+            <div class="form-group">
+              <label>CuId:</label>
+              <input type="number" name="cuid" id="cuid" class="form-control" min="1" placeholder="1...2">
+            </div>
+
+            <div class="form-group">
+              <label>DuId:</label>
+              <input type="number" name="duid" id="duid" class="form-control" min="1" placeholder="1...100">
+            </div>
+
+            <div class="form-group">
+              <label>CellId:</label>
+              <input type="number" name="cellid" id="cellid" class="form-control" min="1" placeholder="1...300">
+            </div>
+            <input type="hidden" name="op" value="add">
+            <button type="submit" class="btn btn-default" onclick="return checkAllInput();">增加小区</button>
+          </form>
+
+          <script type="text/javascript">
+            function checkInput(id, msg) {
+              var content = document.getElementById(id);
+              if (content.value.length == 0) {
+                alert(msg);
+                return false
+              }
+              return true
+            }
+
+            function checkAllInput() {
+              return checkInput("cuid", "请输入CuID") &&
+                     checkInput("duid", "请输入DuID") &&
+                     checkInput("cellid", "请输入CellID");
+            }
+          </script>
+
           <table class="table table-striped">
             <thead>
               <tr>
@@ -19,16 +54,21 @@
                 <th>DuId</th>
                 <th>CellId</th>
                 <th>Freq</th>
+                <th>Operation</th>
               </tr>
             </thead>
             <tbody>
-              {{range .Topics}}
+              {{range .Cells}}
               <tr>
                 <th>{{.Id}}</th>
                 <th>{{.Cuid}}</th>
                 <th>{{.Duid}}</th>
                 <th>{{.Cellid}}</th>
                 <th>{{.Freq}}</th>
+                <th>
+                  <a href="/cell?op=setup&id={{.Id}}">setup</a>
+                  <a href="/cell?op=del&id={{.Id}}">删除</a>
+                </th>
               </tr>
               {{end}}
             </tbody>

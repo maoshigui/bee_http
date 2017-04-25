@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	_DB_NAME        = "data/beeblog.db"
+	_DB_NAME        = "data/goms.db"
 	_SQLITE3_DRIVER = "sqlite3"
 )
 

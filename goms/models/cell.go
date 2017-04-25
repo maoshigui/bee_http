@@ -10,12 +10,12 @@ import (
 type Cell struct {
 	Id     int64
 	Cuid   string
-	Duid   uint32 `orm:"index"`
-	Cellid uint32 `orm:"index"`
+	Duid   string `orm:"index"`
+	Cellid string `orm:"index"`
 	Freq   uint32
 }
 
-func AddCell(cuid, duid, cellid uint32) error {
+func AddCell(cuid, duid, cellid string) error {
 	o := orm.NewOrm()
 	cell := &Cell{
 		Cuid:   cuid,
